@@ -50,7 +50,17 @@ public class CatalogActivity extends AppCompatActivity {
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PetEntry.TABLE_NAME, null);
+        String[] projection = {
+                PetEntry._ID,
+                PetEntry.COLUMN_PET_NAME,
+                PetEntry.COLUMN_PET_BREED,
+                PetEntry.COLUMN_PET_GENDER,
+                PetEntry.COLUMN_PET_WEIGHT
+        };
+
+        Cursor cursor = db.query(PetEntry.TABLE_NAME, projection,null, null,
+                null, null, null);
+
         try {
 
             TextView displayView = (TextView) findViewById(R.id.text_view_pet);
